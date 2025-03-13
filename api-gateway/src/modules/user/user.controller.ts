@@ -4,10 +4,17 @@ import { firstValueFrom } from 'rxjs';
 
 @Controller('users')
 export class UserController {
-  constructor(@Inject('USER_SERVICE') private readonly userService: ClientProxy) {}
+    constructor(
+        @Inject('USER_SERVICE') private readonly userService: ClientProxy,
+    ) {}
 
-  @Post('register')
-  async registerUser(@Body() data: { username: string; password: string; role: string }) {
-    return firstValueFrom(this.userService.send({ cmd: 'create_user' }, data));
-  }
+    @Post('register')
+    async registerUser(
+        @Body() data: { 
+            username: string; 
+            password: string; 
+            role: string },
+    ) {
+        return firstValueFrom(this.userService.send({ cmd: 'create_user' }, data));
+    }
 }
